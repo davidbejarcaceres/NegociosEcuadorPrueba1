@@ -11,6 +11,14 @@
         android:scaleType="centerCrop"
         android:background="@drawable/img_menu_riobamba" />
 
+    <ImageView
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="41dp"
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        android:src="@drawable/logotipo" />
+
 
     <LinearLayout
         android:layout_width="match_parent"

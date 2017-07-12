@@ -12,9 +12,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+
+import static com.utpl.david_bejar.negociosecuadorprueba1.R.id.fab;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +28,27 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar); //Permite activar la barra de notificaciones con acciones
         setSupportActionBar(toolbar);
+
+        //Abre la URL
+        WebView webView = (WebView) findViewById(R.id.web);
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.getSettings().setBuiltInZoomControls(false);
+        webView.getSettings().setGeolocationEnabled(true);
+        webView.getSettings().setAppCacheEnabled(true);
+        webView.getSettings().setDatabaseEnabled(true);
+        webView.getSettings().setDomStorageEnabled(true);
+        webView.setWebChromeClient(new GeoWebChromeClient()); //Llama a un ChromeClient para poder usar los permisios de geolocalización
+        webView.loadUrl("https://negocios-ecuador.com/es");
+
+        //Permite abrir los enlaces dentro de la misma webView
+        webView.setWebViewClient(new WebViewClient()
+        {
+            public boolean shouldOverrideUrlLoading(WebView view, String url){
+                return false;
+            }
+        });
+
+
 
         //Provee comportamiento para el botón flotante, pero se lo ha ocultado.
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -43,12 +70,16 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
     }
 
-    //permite cerrar el menú hamburguesa si está abierto al presionar la tecla atrás
+
+    //permite cerrar el menú hamburguesa si está abierto al presionar la tecla atrás o retroceder en el Webview si hay páginas abiertas anteriormente
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        WebView webView = (WebView) findViewById(R.id.web);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
+        } else if (webView.copyBackForwardList().getCurrentIndex() > 0) {
+            webView.goBack();
         } else {
             super.onBackPressed();
         }
@@ -81,19 +112,22 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        WebView webView = (WebView) findViewById(R.id.web);
 
         if (id == R.id.nav_productos_servicios) {
-            // Handle the camera action
+            webView.loadUrl("https://negocios-ecuador.com/es/producto_servicio");
         } else if (id == R.id.nav_hospedar) {
-
+            webView.loadUrl("https://negocios-ecuador.com/es/hotel_hostal");
         } else if (id == R.id.nav_cafeterías) {
-
+            webView.loadUrl("https://negocios-ecuador.com/es/cafeteria");
         } else if (id == R.id.nav_restaurante) {
-
+            webView.loadUrl("https://negocios-ecuador.com/es/restaurante");
         } else if (id == R.id.nav_populares) {
-
-        } else if (id == R.id.nav_send) {
-
+            webView.loadUrl("https://negocios-ecuador.com/es/populares");
+        } else if (id == R.id.nav_contacto) {
+            webView.loadUrl("https://negocios-ecuador.com/es/contact");
+        } else if (id == R.id.nav_inicio) {
+            webView.loadUrl("https://negocios-ecuador.com/es");
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
