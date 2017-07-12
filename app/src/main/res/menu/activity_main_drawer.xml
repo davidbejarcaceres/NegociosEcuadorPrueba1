@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_productos_servicios"
+            android:icon="@drawable/ic_menu_compras"
+            android:title="Productos/Servicios" />
+        <item
+            android:id="@+id/nav_hospedar"
+            android:icon="@drawable/ic_menu_hotel"
+            android:title="Hospedaje" />
+        <item
+            android:id="@+id/nav_cafeterías"
+            android:icon="@drawable/ic_menu_cafe"
+            android:title="Cafeterías" />
+        <item
+            android:id="@+id/nav_restaurante"
+            android:icon="@drawable/ic_menu_restaurante"
+            android:title="Restaurantes" />
+        <item
+            android:id="@+id/nav_populares"
+            android:icon="@drawable/ic_menu_estrella"
+            android:title="Populares" />
+    </group>
+
+    <item android:title="Otros">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_menu_email"
+                android:title="Contacto" />
+            <item
+                android:id="@+id/nav_send"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Añadir..." />
+        </menu>
+    </item>
+
+</menu>
